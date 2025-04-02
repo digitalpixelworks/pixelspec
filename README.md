@@ -1,7 +1,7 @@
 # PixelSpec 🔍
 *A comprehensive hardware diagnostics tool for Android*
 
-![Banner](https://github.com/digitalpixelworks/pixelspec/raw/main/assets/banner.png)
+![Banner](https://github.com/digitalpixelworks/pixelspec/tree/main/assets/banner.png)
 
 ## Features ✨
 - **Real-time monitoring** of CPU, RAM, battery, and sensors
@@ -24,8 +24,8 @@ Download from:
 ## Privacy & Security 🔒
 - **No data collection** - All processing happens locally
 - Full policies:
-    - [Privacy Policy](https://github.com/digitalpixelworks/pixelspec/blob/main/PRIVACY.md)
-    - [Terms of Service](https://github.com/digitalpixelworks/pixelspec/blob/main/TERMS.md)
+    - [Privacy Policy](https://github.com/digitalpixelworks/pixelspec/blob/main/privacy_policy.md)
+    - [Terms of Service](https://github.com/digitalpixelworks/pixelspec/blob/main/terms_of_service.md)
 
 ## Build Locally 🏗️
 ```bash
