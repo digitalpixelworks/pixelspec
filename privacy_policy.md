@@ -1,5 +1,5 @@
 # Privacy Policy for PixelSpec
-*Last Updated: {{DATE}}*  
+*Last Updated: 2 April 2025*  
 *Developer: DigitalPixelWorks*
 
 ## 1. Information Collection
@@ -19,10 +19,10 @@ PixelSpec **does not collect, store, or transmit** personal data. The app reads:
 - Zero third-party tracking or ads.
 
 ## 4. Children’s Privacy
-🚫 Not intended for users under **13 years old**.
+- This app is not age restricted. 
 
 ## 5. Changes
 Updates posted at:  
-[https://github.com/{{USERNAME}}/{{REPO}}/blob/main/privacy_policy.md](https://github.com/{{USERNAME}}/{{REPO}}/blob/main/privacy_policy.md)
+[https://github.com/digitalpixelworks/pixelspec/blob/main/privacy_policy.md](https://github.com/digitalpixelworks/pixelspec/blob/main/privacy_policy.md)
 
 **Contact:** [digitalpixelworks01@domain.com](mailto:digitalpixelworks01@domain.com)  
