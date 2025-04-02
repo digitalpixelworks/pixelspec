@@ -6,21 +6,19 @@ on:
       - main
 
 permissions:
-  contents: write   # Grants permission to push tags and modify repository contents
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the repository with all history and tags
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           submodules: true
-          fetch-depth: 0  # Fetch all history including tags
+          fetch-depth: 0
 
-      # 2. Cache Gradle packages
       - name: Cache Gradle packages
         if: env.skip_build != 'true'
         uses: actions/cache@v3
@@ -32,7 +30,6 @@ jobs:
           restore-keys: |
             gradle-${{ runner.os }}-
 
-      # 3. Check commit message to decide whether to skip build
       - name: Check commit message
         id: check_commit
         run: |
@@ -44,7 +41,6 @@ jobs:
             echo "skip_build=false" >> $GITHUB_ENV
           fi
 
-      # 4. Set up Java 21
       - name: Set up Java 21
         if: env.skip_build != 'true'
         uses: actions/setup-java@v4
@@ -52,7 +48,6 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      # 5. Set up Android SDK and NDK
       - name: Set up Android SDK and NDK
         if: env.skip_build != 'true'
         uses: android-actions/setup-android@v2
@@ -62,7 +57,6 @@ jobs:
           distribution-type: 'sdk'
           build-tools: '35.0.0'
 
-      # 6. Decode and save google-services.json
       - name: Set up google-services.json
         if: env.skip_build != 'true'
         run: |
@@ -83,24 +77,19 @@ jobs:
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON || '' }}
 
-      # 7. Determine Next Build Number
       - name: Determine Next Build Number
         id: build_number
         if: env.skip_build != 'true'
         run: |
-          # Define version components with leading zeros
           vMajor=1
-          vMinor=01  # Ensure leading zero to match tag format 'v1.01.*'
-          # Fetch all tags matching v1.01.*
+          vMinor=01
           tags=$(git tag -l "v${vMajor}.${vMinor}.*")
           echo "Existing tags: $tags"
-          # Extract build numbers
           build_numbers=()
           for tag in $tags; do
             build_num=${tag#v${vMajor}.${vMinor}.}
             build_numbers+=($build_num)
           done
-          # Determine the maximum build number
           max=0
           for num in "${build_numbers[@]}"; do
             if ((10#$num > max)); then
@@ -108,23 +97,18 @@ jobs:
             fi
           done
           echo "Current Max Build Number: $max"
-          # Increment build number
           next=$((max + 1))
-          # Zero-pad to 4 digits
           next_padded=$(printf "%04d" $next)
           echo "Next Build Number: $next_padded"
-          # Export variables
           echo "BUILD_NUMBER=$next_padded" >> $GITHUB_ENV
           echo "versionName=1.${vMinor}.$next_padded" >> $GITHUB_ENV
 
-      # 8. Set up signing keystore
       - name: Set up signing keystore
         if: env.skip_build != 'true'
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | openssl base64 -d -A -out keystore.jks
           echo "Keystore file created in the root directory."
 
-      # 9. Create signing.properties
       - name: Create signing.properties
         if: env.skip_build != 'true'
         run: |
@@ -133,17 +117,14 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> signing.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> signing.properties
 
-      # 10. Make gradlew executable
       - name: Make gradlew executable
         if: env.skip_build != 'true'
         run: chmod +x ./gradlew
 
-      # 11. Write Version Name to File
       - name: Write Version Name to File
         if: env.skip_build != 'true'
         run: ./gradlew writeVersionNameToFile
 
-      # 12. Verify Version Name File
       - name: Verify Version Name File
         if: env.skip_build != 'true'
         run: |
@@ -152,7 +133,6 @@ jobs:
           echo "Listing app/build directory:"
           ls -l app/build/
 
-      # 13. Read App Version
       - name: Read App Version
         if: env.skip_build != 'true'
         run: |
@@ -160,27 +140,22 @@ jobs:
           echo "versionName=$VERSION_NAME" >> $GITHUB_ENV
           echo "Version Name: $VERSION_NAME"
 
-      # 14. Run Lint Checks
       - name: Run Lint Checks
         if: env.skip_build != 'true'
         run: ./gradlew lint --warning-mode all
 
-      # 15. Build with Gradle (now includes bundleRelease)
       - name: Build with Gradle
         if: env.skip_build != 'true'
         run: |
           ./gradlew assembleRelease bundleRelease lintVitalRelease -PBUILD_NUMBER=$BUILD_NUMBER --warning-mode all --no-configuration-cache
 
-      # 16. Rename Artifacts (APK and AAB)
       - name: Rename Artifacts
         if: env.skip_build != 'true'
         run: |
-          # Rename APK
           ORIGINAL_APK="app/build/outputs/apk/release/app-release.apk"
           RENAMED_APK="app/build/outputs/apk/release/io.android.pixelspec_v${{ env.versionName }}.apk"
           mv "$ORIGINAL_APK" "$RENAMED_APK"
           
-          # Rename AAB
           ORIGINAL_AAB="app/build/outputs/bundle/release/app-release.aab"
           RENAMED_AAB="app/build/outputs/bundle/release/io.android.pixelspec_v${{ env.versionName }}.aab"
           mv "$ORIGINAL_AAB" "$RENAMED_AAB"
@@ -190,7 +165,6 @@ jobs:
           ls -l app/build/outputs/apk/release/
           ls -l app/build/outputs/bundle/release/
 
-      # 17. Verify Artifacts Before Upload
       - name: Verify Artifacts Before Upload
         if: env.skip_build != 'true'
         run: |
@@ -202,12 +176,10 @@ jobs:
             exit 1
           fi
 
-      # 18. Collect Release Notes
       - name: Collect Release Notes
         id: release_notes
         if: env.skip_build != 'true'
         run: |
-          # Function to check if a commit is automated
           is_automated_commit() {
             local message="$1"
             if [[ "$message" =~ ^Update\ android-ci\.yml || "$message" =~ ^Update\ create-release\.yml ]]; then
@@ -216,26 +188,20 @@ jobs:
               return 1
             fi
           }
-          # Fetch the latest commit message
           RECENT_COMMIT=$(git log -1 --pretty=%B)
-          # Check if it's an automated commit
           if is_automated_commit "$RECENT_COMMIT"; then
-            # Fetch the previous commit message
             RECENT_COMMIT=$(git log -2 --pretty=format:"%B" | tail -1)
           fi
           echo "release_notes=$RECENT_COMMIT" >> $GITHUB_ENV
 
-      # 19. Create and Push Tag BEFORE Creating Release
       - name: Create and Push Tag
         if: env.skip_build != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Create and push the new tag
           git tag -a "v${{ env.versionName }}" -m "Release v${{ env.versionName }}"
           git push origin "v${{ env.versionName }}"
 
-      # 20. Upload artifacts (both APK and AAB)
       - name: Upload artifacts
         if: env.skip_build != 'true'
         uses: actions/upload-artifact@v4
@@ -246,7 +212,6 @@ jobs:
             app/build/outputs/bundle/release/io.android.pixelspec_v${{ env.versionName }}.aab
           retention-days: 2
 
-      # 21. Create GitHub Release
       - name: Create GitHub Release
         if: env.skip_build != 'true'
         id: create_release
@@ -260,20 +225,24 @@ jobs:
           draft: false
           prerelease: false
 
-      # 22. Upload Release Assets (both APK and AAB)
-      - name: Upload Release Assets
+      - name: Upload Release APK
         if: env.skip_build != 'true'
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: |
-            app/build/outputs/apk/release/io.android.pixelspec_v${{ env.versionName }}.apk
-            app/build/outputs/bundle/release/io.android.pixelspec_v${{ env.versionName }}.aab
-          asset_name: |
-            io.android.pixelspec_v${{ env.versionName }}.apk
-            io.android.pixelspec_v${{ env.versionName }}.aab
-          asset_content_type: |
-            application/vnd.android.package-archive
-            application/octet-stream
+          asset_path: app/build/outputs/apk/release/io.android.pixelspec_v${{ env.versionName }}.apk
+          asset_name: io.android.pixelspec_v${{ env.versionName }}.apk
+          asset_content_type: application/vnd.android.package-archive
+
+      - name: Upload Release AAB
+        if: env.skip_build != 'true'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/bundle/release/io.android.pixelspec_v${{ env.versionName }}.aab
+          asset_name: io.android.pixelspec_v${{ env.versionName }}.aab
+          asset_content_type: application/octet-stream
