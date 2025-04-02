@@ -23,7 +23,7 @@ class AppsViewModel @Inject constructor(
         loadApps()
     }
 
-    fun loadApps() {
+    private fun loadApps() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
             try {

@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import io.android.pixelspec.presentation.screen.about.AboutScreen
 import io.android.pixelspec.presentation.screen.apps.AppsScreen
 import io.android.pixelspec.presentation.screen.home.HomeScreen
 import io.android.pixelspec.presentation.screen.settings.SettingsScreen
@@ -29,12 +28,6 @@ fun AppNavigation() {
 
         composable(Destinations.SETTINGS) {
             SettingsScreen(
-                onBackClick = { navController.popBackStack() },
-                onAboutClick = { navController.navigate(Destinations.ABOUT) })
-        }
-
-        composable(Destinations.ABOUT) {
-            AboutScreen(
                 onBackClick = { navController.popBackStack() })
         }
     }

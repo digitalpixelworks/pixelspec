@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,15 +26,19 @@ import io.android.pixelspec.R
 import io.android.pixelspec.presentation.component.PreferenceItem
 import io.android.pixelspec.presentation.component.SectionTitle
 import io.android.pixelspec.presentation.component.ThemeSelectionItem
+import io.android.pixelspec.presentation.util.openUrl
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     onBackClick: () -> Unit,
-    onAboutClick: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val themeState by viewModel.themeState.collectAsState()
+    val context = LocalContext.current
+
+    val privacyPolicyUrl = stringResource(R.string.privacy_policy_url)
+    val termsOfServiceUrl = stringResource(R.string.terms_of_service_url)
 
     Scaffold(
         topBar = {
@@ -54,24 +59,25 @@ fun SettingsScreen(
         ) {
             // Theme Section
             SectionTitle(
-                title = stringResource(R.string.appearance),
-                modifier = Modifier.padding(16.dp)
+                title = stringResource(R.string.appearance), modifier = Modifier.padding(16.dp)
             )
             ThemeSelectionItem(
                 currentMode = themeState.themeMode, onThemeSelected = viewModel::updateThemeMode
             )
 
             // About Section
-            SectionTitle(title = stringResource(R.string.about), modifier = Modifier.padding(16.dp))
+            SectionTitle(
+                title = stringResource(R.string.about), modifier = Modifier.padding(16.dp)
+            )
             PreferenceItem(
                 title = stringResource(R.string.version), subtitle = BuildConfig.VERSION_NAME
             )
             PreferenceItem(
                 title = stringResource(R.string.privacy_policy),
-                onClick = { /* Handle privacy policy click */ })
+                onClick = { context.openUrl(privacyPolicyUrl) })
             PreferenceItem(
                 title = stringResource(R.string.terms_of_service),
-                onClick = { /* Handle terms click */ })
+                onClick = { context.openUrl(termsOfServiceUrl) })
         }
     }
 }
