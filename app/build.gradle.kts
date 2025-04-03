@@ -34,7 +34,7 @@ android {
 
         // Retrieve version components from environment variables or use default values
         val vMajor = System.getenv("VERSION_MAJOR") ?: "1"
-        var vMinor = System.getenv("VERSION_MINOR") ?: "01"
+        var vMinor = System.getenv("VERSION_MINOR") ?: "00"
         var buildNumber = System.getenv("BUILD_NUMBER") ?: "0001"
 
         try {
