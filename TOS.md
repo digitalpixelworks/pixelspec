@@ -15,6 +15,6 @@ By using PixelSpec, you agree to:
 Violations may result in revoked access.
 
 Full policy at:  
-[https://github.com/digitalpixelworks/pixelspec/blob/main/terms_of_service.md](https://github.com/digitalpixelworks/pixelspec/blob/main/terms_of_service.md)
+[https://github.com/digitalpixelworks/pixelspec/blob/main/TOS.md](https://github.com/digitalpixelworks/pixelspec/blob/main/TOS.md)
 
 **Contact:** [digitalpixelworks01@domain.com](mailto:digitalpixelworks01@domain.com)  
