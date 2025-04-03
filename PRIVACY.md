@@ -23,6 +23,6 @@ PixelSpec **does not collect, store, or transmit** personal data. The app reads:
 
 ## 5. Changes
 Updates posted at:  
-[https://github.com/digitalpixelworks/pixelspec/blob/main/PRIVACY.md](https://github.com/digitalpixelworks/pixelspec/blob/main/privacy_policy.md)
+[https://github.com/digitalpixelworks/pixelspec/blob/main/PRIVACY.md](https://github.com/digitalpixelworks/pixelspec/blob/main/PRIVACY.md)
 
 **Contact:** [digitalpixelworks01@domain.com](mailto:digitalpixelworks01@domain.com)  
