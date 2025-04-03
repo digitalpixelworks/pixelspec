@@ -21,4 +21,6 @@ Only the **latest stable release** receives security updates.
 
 ## Known Risks ⚠️  
 - Battery temperature readings may be **inaccurate** on some devices  
-- Root detection can be **bypassed** (non-critical)  
+- Root detection can be **bypassed** (non-critical)
+- No **encryption** for local data (not applicable)
+- Screen uptime may be **inaccurate** on some devices
