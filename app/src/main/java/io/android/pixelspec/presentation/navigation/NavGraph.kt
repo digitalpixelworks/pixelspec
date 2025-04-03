@@ -17,14 +17,15 @@ fun AppNavigation() {
     ) {
         composable(Destinations.HOME) {
             HomeScreen(
-                onAppsClick = { navController.navigate(Destinations.APPS) },
+//                onAppsClick = { navController.navigate(Destinations.APPS) },
                 onSettingsClick = { navController.navigate(Destinations.SETTINGS) })
         }
 
-        composable(Destinations.APPS) {
-            AppsScreen(
-                onBackClick = { navController.popBackStack() })
-        }
+        // TODO: Uncomment when AppsScreen is implemented (Add the necessary permissions in AndroidManifest.xml)
+//        composable(Destinations.APPS) {
+//            AppsScreen(
+//                onBackClick = { navController.popBackStack() })
+//        }
 
         composable(Destinations.SETTINGS) {
             SettingsScreen(

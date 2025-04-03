@@ -34,7 +34,7 @@ import io.android.pixelspec.presentation.util.AdManager
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onAppsClick: () -> Unit,
+//    onAppsClick: () -> Unit,
     onSettingsClick: () -> Unit,
     viewModel: HardwareViewModel = hiltViewModel()
 ) {
@@ -64,9 +64,9 @@ fun HomeScreen(
             IconButton(onClick = onSettingsClick) {
                 Icon(Icons.Default.Settings, "Settings")
             }
-            IconButton(onClick = onAppsClick) {
-                Icon(Icons.Default.Apps, "Installed Apps")
-            }
+//            IconButton(onClick = onAppsClick) {
+//                Icon(Icons.Default.Apps, "Installed Apps")
+//            }
         })
     }, bottomBar = {
         if (showAd && LocalInspectionMode.current.not()) {
