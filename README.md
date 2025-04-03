@@ -30,8 +30,8 @@ Download from:
 ## Privacy & Security 🔒
 - **No data collection** - All processing happens locally
 - Full policies:
-    - [Privacy Policy](https://github.com/digitalpixelworks/pixelspec/blob/main/privacy_policy.md)
-    - [Terms of Service](https://github.com/digitalpixelworks/pixelspec/blob/main/terms_of_service.md)
+    - [Privacy Policy](https://github.com/digitalpixelworks/pixelspec/blob/main/PRIVACY.md)
+    - [Terms of Service](https://github.com/digitalpixelworks/pixelspec/blob/main/TOS.md)
 
 ## Build Locally 🏗️
 ```bash
