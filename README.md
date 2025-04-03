@@ -5,8 +5,8 @@
 - **Device analytics** with detailed hardware specs
 
 ## Preview 📸
-<p><img src="main/assets/phoneScreenshots/phone_home1.png" width="32%" /> <img src="main/assets/phoneScreenshots/phone_home2.png" width="32%" /> <img src="main/assets/phoneScreenshots/phone_home3.png" width="32%" />
-<img src="main/assets/phoneScreenshots/phone_apps1.png" width="32%" /> <img src="main/assets/phoneScreenshots/phone_settings1.png" width="32%" />
+<p><img src="assets/phoneScreenshots/phone_home1.png" width="32%" /> <img src="assets/phoneScreenshots/phone_home2.png" width="32%" /> <img src="assets/phoneScreenshots/phone_home3.png" width="32%" />
+<img src="assets/phoneScreenshots/phone_apps1.png" width="32%" /> <img src="assets/phoneScreenshots/phone_settings1.png" width="32%" />
 
 ## Build Stats 📊
 ![GitHub Repo stars](https://img.shields.io/github/stars/digitalpixelworks/pixelspec?style=social)
