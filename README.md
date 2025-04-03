@@ -18,8 +18,7 @@
 
 ## Installation 📦
 Download from:  
-[![Google Play](https://img.shields.io/badge/Google_Play-414141?logo=google-play)](https://play.google.com/store/apps/details?id=io.android.pixelspec)  
-[![GitHub Release](https://img.shields.io/github/v/release/digitalpixelworks/pixelspec?logo=github)](https://github.com/digitalpixelworks/pixelspec/releases)
+[<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="240">](https://play.google.com/store/apps/details?id=io.android.pixelspec) [<img alt="Get it on GitHub" src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/main/get-it-on-github.png" width="240">](https://github.com/digitalpixelworks/pixelspec/releases)
 
 ## Usage 🛠️
 1. Open the app to view **real-time device stats**
