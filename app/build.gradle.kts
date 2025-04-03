@@ -20,6 +20,10 @@ if (signingPropertiesFile.exists()) {
     }
 }
 
+// Access the extra properties safely
+val admobAppId: String by rootProject.extra
+val admobBannerId: String by rootProject.extra
+
 android {
     namespace = "io.android.pixelspec"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -45,12 +49,20 @@ android {
 
         resValue("string", "app_version", "$versionName ($versionCode)")
         buildConfigField(
-            "String",
-            "FILE_PROVIDIER_AUTHORITY",
-            "APPLICATION_ID + \".file_provider\""
+            "String", "FILE_PROVIDIER_AUTHORITY", "APPLICATION_ID + \".file_provider\""
         )
         resValue("string", "app_provider_authority", "$applicationId.app_provider")
         resValue("string", "file_provider_authority", "$applicationId.file_provider")
+
+        // Add to BuildConfig
+        buildConfigField("String", "ADMOB_APP_ID", "\"$admobAppId\"")
+        buildConfigField("String", "ADMOB_BANNER_ID", "\"$admobBannerId\"")
+
+        // Add to manifest placeholders
+        manifestPlaceholders.apply {
+            put("admobAppId", admobAppId)
+            put("admobBannerId", admobBannerId)
+        }
     }
 
     // Move signingConfigs block before buildTypes
@@ -161,12 +173,17 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.perf)
 
+    // Ads
+    implementation(libs.play.services.ads)
+
     // Coil
     implementation(libs.coil.kt.compose)
 
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(libs.androidx.datastore.preferences)
 
     // If you need the core DataStore library (without Android dependencies)
-    implementation("androidx.datastore:datastore-core:1.0.0")
+    implementation(libs.datastore.core)
+
+
 }

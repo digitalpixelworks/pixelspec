@@ -7,8 +7,10 @@
     <string name="version">Version</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_service">Terms of Service</string>
-    <string name="privacy_policy_url">https://github.com/digitalpixelworks/pixelspec/blob/main/privacy_policy.md</string>
-    <string name="terms_of_service_url">https://github.com/digitalpixelworks/pixelspec/blob/main/terms_of_service.md</string>
+    <string name="license">License</string>
+    <string name="license_url">https://github.com/digitalpixelworks/pixelspec/blob/main/LICENSE</string>
+    <string name="privacy_policy_url">https://github.com/digitalpixelworks/pixelspec/blob/main/PRIVACY.md</string>
+    <string name="terms_of_service_url">https://github.com/digitalpixelworks/pixelspec/blob/main/TOS.md</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="system_theme">System Default</string>

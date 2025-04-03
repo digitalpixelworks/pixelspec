@@ -16,6 +16,9 @@ plugins {
     alias(libs.plugins.gms) apply false
 }
 
+// Apply secrets from root directory
+apply(from = "secrets.gradle.kts")
+
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "com.mikepenz.aboutlibraries.plugin")
@@ -27,7 +30,6 @@ subprojects {
     }
 
     configure<com.mikepenz.aboutlibraries.plugin.AboutLibrariesExtension> {
-        // Remove the "generated" timestamp to allow for reproducible builds
         excludeFields = arrayOf("generated")
         duplicationMode = DuplicateMode.MERGE
     }
@@ -43,7 +45,6 @@ allprojects {
                 TestLogEvent.STANDARD_OUT,
                 TestLogEvent.STANDARD_ERROR
             )
-
             exceptionFormat = TestExceptionFormat.FULL
             showExceptions = true
             showCauses = true

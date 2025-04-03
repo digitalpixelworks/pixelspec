@@ -285,19 +285,12 @@ class SystemHardwareDataSource @Inject constructor(
 
     private fun getDeviceSecurity(): DeviceInfo.DeviceSecurity? {
         return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                DeviceInfo.DeviceSecurity(
-                    selinuxStatus = getSelinuxStatus(),
-                    verifiedBoot = getVerifiedBootState(),
-                    securityPatch = Build.VERSION.SECURITY_PATCH
-                )
-            } else {
-                DeviceInfo.DeviceSecurity(
-                    selinuxStatus = getSelinuxStatus(),
-                    verifiedBoot = getVerifiedBootState(),
-                    securityPatch = "Unknown"
-                )
-            }
+
+            DeviceInfo.DeviceSecurity(
+                selinuxStatus = getSelinuxStatus(),
+                verifiedBoot = getVerifiedBootState(),
+                securityPatch = Build.VERSION.SECURITY_PATCH
+            )
         } catch (e: Exception) {
             null
         }
@@ -315,11 +308,7 @@ class SystemHardwareDataSource @Inject constructor(
 
     private fun getVerifiedBootState(): String {
         return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                Build.VERSION.SECURITY_PATCH ?: "Unknown"
-            } else {
-                "Unknown"
-            }
+            Build.VERSION.SECURITY_PATCH ?: "Unknown"
         } catch (e: Exception) {
             "Unknown"
         }
@@ -513,7 +502,7 @@ class SystemHardwareDataSource @Inject constructor(
             SecurityInfo(
                 bootloaderStatus = Build.BOOTLOADER,
                 googlePlayProtect = isGooglePlayProtectEnabled(),
-                encryptionStatus = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) getEncryptionStatus() else "Unknown"
+                encryptionStatus = getEncryptionStatus()
             )
         } catch (e: Exception) {
             null
@@ -534,14 +523,10 @@ class SystemHardwareDataSource @Inject constructor(
     // getEncryptionStatus uses reflection-safe access if necessary.
     private fun getEncryptionStatus(): String {
         return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                when (Build.VERSION.SECURITY_PATCH) {
-                    "FBE" -> "File-Based"
-                    "FDE" -> "Full-Disk"
-                    else -> "Unknown"
-                }
-            } else {
-                "Unknown"
+            when (Build.VERSION.SECURITY_PATCH) {
+                "FBE" -> "File-Based"
+                "FDE" -> "Full-Disk"
+                else -> "Unknown"
             }
         } catch (e: Exception) {
             "Unknown"

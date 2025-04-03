@@ -70,3 +70,21 @@
 -keepclassmembers class **.R$* {
     public static <fields>;
 }
+
+# Google Ads
+-keep public class com.google.android.gms.ads.** {
+   public *;
+}
+
+-keep public class com.google.ads.** {
+   public *;
+}
+
+-keep class com.google.android.gms.** { *; }
+-keep class com.google.ads.** { *; }
+
+-keep class com.google.android.gms.ads.identifier.** { *; }
+
+# SafeAtomicHelper fix
+-keep class com.google.android.gms.internal.ads.zzgah { *; }
+-keep class com.google.android.gms.internal.ads.zzgae { *; }

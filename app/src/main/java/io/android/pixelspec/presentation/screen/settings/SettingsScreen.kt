@@ -39,6 +39,7 @@ fun SettingsScreen(
     val themeState by viewModel.themeState.collectAsState()
     val context = LocalContext.current
 
+    val licenseUrl = stringResource(R.string.license_url)
     val privacyPolicyUrl = stringResource(R.string.privacy_policy_url)
     val termsOfServiceUrl = stringResource(R.string.terms_of_service_url)
 
@@ -63,7 +64,6 @@ fun SettingsScreen(
                     .weight(1f)
                     .verticalScroll(rememberScrollState())
             ) {
-                // Your existing content
                 SectionTitle(
                     title = stringResource(R.string.appearance), modifier = Modifier.padding(16.dp)
                 )
@@ -77,6 +77,9 @@ fun SettingsScreen(
                 PreferenceItem(
                     title = stringResource(R.string.version), subtitle = BuildConfig.VERSION_NAME
                 )
+                PreferenceItem(
+                    title = stringResource(R.string.license),
+                    onClick = { context.openUrl(licenseUrl) })
                 PreferenceItem(
                     title = stringResource(R.string.privacy_policy),
                     onClick = { context.openUrl(privacyPolicyUrl) })
