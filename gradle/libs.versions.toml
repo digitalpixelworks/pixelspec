@@ -3,14 +3,13 @@ android-compileSdk = "35"
 android-targetSdk = "35"
 android-minSdk = "23"
 android-jvm = "21"
-aboutlibraries = "11.2.3"
 accompanist = "0.37.2"
 androidGradlePlugin = "8.9.1"
 androidMaterial = "1.12.0"
 androidxActivity = "1.10.1"
 androidxAppCompat = "1.7.0"
-androidxComposeBom = "2025.03.01"
-androidxCore = "1.15.0"
+androidxComposeBom = "2025.04.00"
+androidxCore = "1.16.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxEspresso = "3.6.1"
 androidxHiltNavigationCompose = "1.2.0"
@@ -29,7 +28,7 @@ junit4 = "4.13.2"
 kotlin = "2.1.20"
 ksp = "2.1.20-1.0.32"
 ktlint = "12.1.2"
-playServicesAds = "24.1.0"
+playServicesAds = "24.2.0"
 timber = "5.0.1"
 firebaseCrashlytics = "3.0.3"
 datastoreCoreAndroid = "1.1.4"
@@ -72,7 +71,6 @@ androidx-datastore-core-android = { group = "androidx.datastore", name = "datast
 androidx-datastore-preferences-core-android = { group = "androidx.datastore", name = "datastore-preferences-core-android", version.ref = "datastorePreferencesCoreAndroid" }
 
 [plugins]
-aboutLibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutlibraries" }
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

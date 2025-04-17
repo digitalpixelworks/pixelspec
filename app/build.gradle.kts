@@ -184,6 +184,4 @@ dependencies {
 
     // If you need the core DataStore library (without Android dependencies)
     implementation(libs.datastore.core)
-
-
 }

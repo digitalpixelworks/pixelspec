@@ -1,9 +1,7 @@
-import com.mikepenz.aboutlibraries.plugin.DuplicateMode
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
-    alias(libs.plugins.aboutLibraries) apply false
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.composeCompiler) apply false
@@ -21,17 +19,11 @@ apply(from = "secrets.gradle.kts")
 
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
-    apply(plugin = "com.mikepenz.aboutlibraries.plugin")
 
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         android.set(true)
         outputColorName.set("RED")
         ignoreFailures.set(false)
-    }
-
-    configure<com.mikepenz.aboutlibraries.plugin.AboutLibrariesExtension> {
-        excludeFields = arrayOf("generated")
-        duplicationMode = DuplicateMode.MERGE
     }
 }
 
